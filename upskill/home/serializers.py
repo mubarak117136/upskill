@@ -21,6 +21,12 @@ class FlatMovieSerializer(serializers.ModelSerializer):
 
 class MovieSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    average_rating = serializers.SerializerMethodField()
+    
+    def get_average_rating(self, obj):
+        total_rating = sum([r.rating for r in obj.ratings.all()])
+        num_of_rating = obj.ratings.count()
+        return round(total_rating/num_of_rating, 1)
     
     class Meta:
         model = models.Movie

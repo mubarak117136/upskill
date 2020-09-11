@@ -45,7 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'phone'
-    REQUIRED_FIELDS = ("email", )
+    REQUIRED_FIELDS = ("name", "email", )
 
     def __str__(self):
         if self.name:

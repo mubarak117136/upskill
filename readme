@@ -1,0 +1,148 @@
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+                                        HOW TO START THE APPLICATION
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
+    Step - 1:
+    ==========================================================================
+
+    Install DOCKER and DOCKER-COMPOSE in your system.
+
+
+    Step - 2:
+    ==========================================================================
+
+    Clone the git repo from this link:
+        https://github.com/mubarak117136/upskill
+
+
+    Step - 3:
+    ==========================================================================
+
+    * Go to the project directory from terminal or cmd.
+    * Run the following docker command :
+        docker-compose build
+        docker-compose up
+
+    This will start the development server in port localhost:8000
+
+    Step - 4:
+    ==========================================================================
+    
+    Start another terminal or cmd and run the following command to migrate
+    the database:
+        docker-compose exec server python manage.py makemigrations
+        docker-compose exec server python manage.py migrate
+
+
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+                                            ABOUT THE APPLICATION
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
+    This application is written on "DJANGO - Python web framework" + "DAJNGO REST FRAMEWORK"
+    I use "POSTGRESQL" as a application database
+
+    The application has browsable api, so you can check the application from your browser.
+    The process will be disscussed in the next section.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+                                            ANSWER OF THE QUESTIONS
+-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------
+
+ANS TO THE QUESTION 1 (User can login):
+====================================================================================
+    * First of all you need to create user. For create user you can use terminal
+        or cmd. Open new terminal and run the following command:
+            
+            docker-compose exec server python manage.py createsuperuser
+        
+        After run this command you will prompt for user information.
+        You can create as many user as you want by run that command.
+
+    * To see the user list go to the following link
+        http://localhost:8000/account/api/users/
+    
+    You can see the list of users you have in the system.
+    
+    * At bottom you find login form. You can login with phone or email.
+        After fillup the signin form click the button "POST".
+        After "POST" button clicked, you find your name top right corner.
+    
+    * For logout you need to go the following link:
+        http://localhost:8000/account/api/users/logout_request/
+    
+        This will logged out you from the application.
+
+
+ANS TO THE QUESTION 2 (User can add a movie):
+====================================================================================
+    * For adding movie you need to login the application. Please follow the 
+        previous ans to find how to login.
+    
+    * After login you need to go the following link:
+        http://localhost:8000/api/movies/
+    
+        Here you find a form to add a movie.
+    
+    * Fill the form with appropriate value and click on "POST" button to add the movie
+        in database.
+
+
+ANS TO THE QUESTION 3 (User can view a list of all movies):
+====================================================================================    
+    
+    * Go the following link to see the listing of all movies:
+        http://localhost:8000/api/movies/
+
+
+ANS TO THE QUESTION 4 (User can rate a movie):
+====================================================================================    
+    * After add movie you can rate that movie.
+    * For that go the following link to see the available movie:
+        http://localhost:8000/api/movies/
+    * In the movie listing you find id for each movie.
+    * By using this id construct new link to add the rating, follow the following 
+        format to create url to add rating:
+
+        http://localhost:8000/api/movies/<movie_id>/rate/
+
+        replace <movie_id> block with your movie id where you want to add rating.
+
+    * In the rating url you find a form to add rating. Put your rate and click 
+        on "POST" button to add the rating to that movie.
+
+    * To see all rating you need to go the following link:
+        http://localhost:8000/api/ratings/
+
+
+
+ANS TO THE QUESTION 5 (User search up a specific movie and see it’s details along with the average rating of a movie):
+==============================================================================================================================
+
+    * For searching a movie you need to go the follong link:
+        http://localhost:8000/api/movies/
+    
+    * In this link you can search movie in two ways:
+        1. add a url params to the current url like this:
+            http://localhost:8000/api/movies/?name=london
+
+            Here i add "name" param to the url. Just replace the value with your value, that will search movie with that matching name.
+        
+        2. Find "filters" button top right corner. Click on "Filters" button and a modal will open. You find a search section
+            in the modal opened. In search section form just put the movie keyword and click on search. It will return the 
+            matching movie list.
+    
+    * To see the details of the movie. You need to construct new url from movie id. Try the following format:
+        
+        http://localhost:8000/api/movies/<movie_id>/
+
+        replace <movie_id> block with your movie id where you want to add rating.
+
+    * In movie detail url you find the "average rating" of that movie
+
